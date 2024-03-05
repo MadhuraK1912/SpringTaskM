@@ -1,0 +1,64 @@
+<section class="vh-100" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-9 col-xl-7">
+        <div class="card rounded-3">
+          <div class="card-body p-4">
+
+            <h4 class="text-center my-3 pb-3">To Do App</h4>
+
+            <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2" (ngSubmit)="insert()">
+              <div class="col-12">
+                <div class="form-outline">
+
+                  <input type="text" id="form1" class="form-control" [(ngModel)]="task.title" name="title"/>
+                  <label class="form-label" for="form1">Enter a task here</label>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </form>
+
+            <table class="table mb-4">
+              <thead>
+                <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">Todo item</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let task of Tasks">
+                  <th scope="row">{{task.id}}</th>
+                  <td>{{task.title}}</td>
+
+                  <td *ngIf="task.status == 0">In progress</td>
+                  <td *ngIf="task.status == 1">Completed</td>
+
+                  <td>
+                    <form (ngSubmit)="delete(task.id)">
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+
+                    <form (ngSubmit)="updateStatus(task)">
+                      <button type="submit" class="btn btn-success ms-1">Finished</button>
+                  </form>
+
+                  <form (ngSubmit)="updateTitle(task)">
+                    <button type="submit" class="btn btn-info ms-1">Update</button>
+                  </form>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
